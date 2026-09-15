@@ -29,6 +29,11 @@
 - [ ] `python tiktok_test.py creator-info` — шаг 18
 - [ ] `python tiktok_test.py publish --file test.mp4 --privacy SELF_ONLY --yes`
       (приватный пост; так работает до audit) — шаг 19
+- [ ] **Direct Post до audit требует ЗАКРЫТОГО аккаунта** (на открытом — 403
+      `unaudited_client_can_only_post_to_private_accounts`). Сейчас @marketal7 открытый →
+      либо перевести аккаунт в Private, либо пользоваться inbox-режимом
+      (видео → уведомление во «Входящие» приложения TikTok → тап → Опубликовать;
+      это НЕ «Черновики»), либо ждать audit
 
 ## App Review
 - [ ] Снять demo-видео по сценарию из TIKTOK_REVIEW.md

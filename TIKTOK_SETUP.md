@@ -123,6 +123,19 @@ python tiktok_test.py publish --file test.mp4 --title "test" --privacy SELF_ONLY
 Пост увидишь только ты (SELF_ONLY / unaudited). Так тестируется весь pipeline:
 init → upload chunks → status → PUBLISH_COMPLETE.
 
+⚠️ **Практика (проверено 16.09.2026, аккаунт @marketal7):** для **открытого (public)**
+аккаунта неаудированное приложение получает на direct init
+`403 unaudited_client_can_only_post_to_private_accounts` — т.е. Direct Post работает
+только на **закрытых (private)** аккаунтах. Варианты:
+1. сделать аккаунт приватным (Settings → Privacy → Private account) → Direct Post с SELF_ONLY заработает;
+2. использовать inbox-режим (`/v2/post/publish/inbox/video/init/`, scope `video.upload`) —
+   TikTok НЕ публикует сам: в мобильном приложении на авторизованном аккаунте приходит
+   **уведомление во «Входящие» (Inbox tab → уведомления/активность), а НЕ в «Черновики»**;
+   по нему открывается редактор, и пост публикуется одним нажатием. Лимит — 5 pending-шар
+   на 24 ч. Статус `SEND_TO_USER_INBOX` означает «доставлено в inbox», это нормально;
+3. дождаться audit (ШАГ 20) → Direct Post доступен на открытом аккаунте.
+Отменить неотправленный inbox-share: `POST /v2/post/publish/cancel/` с `publish_id`.
+
 ## ШАГ 20. Как подать App Review и получить публичную публикацию
 1. Открой **https://developers.tiktok.com/application/content-posting-api**
    (Content Posting API audit application form) со своего аккаунта.
