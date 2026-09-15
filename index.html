@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline — YouTube video processing &amp; TikTok publishing tool</title>
+  <meta name="description" content="Pipeline is a tool for automated YouTube video processing and publishing videos to TikTok through the official TikTok Content Posting API.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <a class="logo" href="./">Pipeline</a>
+    <nav>
+      <a href="#about">about</a>
+      <a href="#features">features</a>
+      <a href="#tiktok">tiktok</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <div class="tag">video automation tool</div>
+    <h1>Pipeline</h1>
+    <p>Pipeline is a YouTube video processing and TikTok publishing tool. Download and process videos automatically, then publish them to your TikTok account through the official TikTok API.</p>
+    <a class="cta" id="connect-tiktok" href="#">Connect TikTok</a>
+    <p class="hint" id="oauth-hint" hidden>
+      OAuth endpoint is not configured yet. Edit <code>config.js</code> and set <code>OAUTH_URL</code>
+      to your deployed Cloudflare Worker URL (see <code>TIKTOK_SETUP.md</code> in the repository).
+    </p>
+  </div>
+
+  <section id="about">
+    <div class="section-label">/ what it does</div>
+    <div class="grid">
+      <div class="card">
+        <h3>Video processing</h3>
+        <p>Pipeline takes source videos and processes them automatically: subtitle rendering, font styling and format conversion.</p>
+      </div>
+      <div class="card">
+        <h3>TikTok publishing</h3>
+        <p>Finished videos are published to TikTok with the official Content Posting API — Direct Post — after you review and confirm each post.</p>
+      </div>
+      <div class="card">
+        <h3>TikTok connection</h3>
+        <p>Account connection uses TikTok OAuth (Login Kit). You grant Pipeline permission to post on your behalf, and you can revoke it at any time.</p>
+      </div>
+      <div class="card">
+        <h3>Your control</h3>
+        <p>Nothing is published without your explicit action. Titles, privacy level and interaction settings are chosen by you before every post.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="section-label">/ how the tiktok integration works</div>
+    <ol class="steps">
+      <li>You click <strong>Connect TikTok</strong> and are redirected to TikTok's official authorization page.</li>
+      <li>You sign in to TikTok and grant Pipeline the requested permissions.</li>
+      <li>Pipeline's OAuth backend receives the authorization code and stores access and refresh tokens securely on the server side.</li>
+      <li>When you publish a video, Pipeline sends it to TikTok's official upload endpoint and tracks the publish status until it completes.</li>
+    </ol>
+  </section>
+
+  <section id="tiktok">
+    <div class="section-label">/ tiktok data</div>
+    <p class="prose">
+      Pipeline uses the official TikTok for Developers APIs:
+      <strong>Login Kit</strong> (OAuth) and the <strong>Content Posting API</strong> (Direct Post).
+      It reads only the account data required for posting: your TikTok profile information
+      (avatar, username, nickname) and the posting settings of your account.
+      Read our <a href="privacy.html">Privacy Policy</a> for details.
+    </p>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="section-label">/ contact</div>
+    <a href="mailto:dongmeier2009@jugarmail.com">dongmeier2009@jugarmail.com</a>
+  </section>
+
+  <footer>
+    <div>© 2026 Pipeline. All rights reserved.</div>
+    <nav>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+  </footer>
+
+  <script src="config.js"></script>
+  <script>
+    (function () {
+      var btn = document.getElementById('connect-tiktok');
+      var hint = document.getElementById('oauth-hint');
+      if (typeof OAUTH_URL === 'string' && OAUTH_URL.indexOf('http') === 0) {
+        btn.href = OAUTH_URL;
+      } else {
+        btn.addEventListener('click', function (e) { e.preventDefault(); });
+        btn.style.opacity = '0.45';
+        hint.hidden = false;
+      }
+    })();
+  </script>
+</body>
+</html>

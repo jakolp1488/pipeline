@@ -1,0 +1,6 @@
+# Local development only (wrangler dev reads this file automatically).
+# NEVER commit a filled-in copy of this file — it is listed in .gitignore.
+# In production use: npx wrangler secret put <NAME>
+TIKTOK_CLIENT_KEY=
+TIKTOK_CLIENT_SECRET=
+WORKER_API_TOKEN=

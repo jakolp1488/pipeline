@@ -1,0 +1,20 @@
+name = "pipeline-tiktok-oauth"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+
+# ---- KV namespace for encrypted-at-rest token storage ----
+# Create it with:  npx wrangler kv namespace create TIKTOK_TOKENS
+# then paste the returned id below.
+[[kv_namespaces]]
+binding = "TIKTOK_TOKENS"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+[vars]
+# Must EXACTLY match the Redirect URI registered in the TikTok Developer Portal:
+# https://<your-worker-subdomain>.workers.dev/callback
+TIKTOK_REDIRECT_URI = "https://REPLACE-WITH-YOUR-WORKER-URL.workers.dev/callback"
+
+# Secrets are NOT set here. Use:
+#   npx wrangler secret put TIKTOK_CLIENT_KEY
+#   npx wrangler secret put TIKTOK_CLIENT_SECRET
+#   npx wrangler secret put WORKER_API_TOKEN

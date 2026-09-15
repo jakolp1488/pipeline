@@ -1,0 +1,22 @@
+# secrets & local config
+.env
+.dev.vars
+tiktok-oauth/.dev.vars
+*.pem
+*.key
+
+# node / wrangler
+node_modules/
+.turbo/
+.wrangler/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+
+# misc
+logs/
+output/
+*.log
+.DS_Store
